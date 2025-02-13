@@ -74,6 +74,15 @@ const config = {
       },
     },
   },
+  animation: {
+    blink: "blink 1s steps(2, start) infinite",
+  },
+  keyframes: {
+    blink: {
+      "0%, 100%": { visibility: "visible" },
+      "50%": { visibility: "hidden" },
+    },
+  },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config
 

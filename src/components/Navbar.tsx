@@ -3,6 +3,8 @@ import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import CustomButton from "./CustomButton";
+import Image from "next/image";
+import logo from "../../public/homepage/logo.webp"
 
 export default function Navbar() {
   return (
@@ -12,9 +14,7 @@ export default function Navbar() {
           <div className="flex justify-between items-center">
             {/* Logo */}
             <Link href="/" className="flex items-center">
-              <span className="text-2xl font-bold tracking-tight">
-                x<span className="inline-block -translate-y-1">^</span>ponentiate
-              </span>
+              <Image src={logo} alt="Logo" className="w-[128.09px] h-[19.97px] md:w-[258.4px] md:h-[40.27px]" />
             </Link>
 
             {/* Desktop Navigation */}
