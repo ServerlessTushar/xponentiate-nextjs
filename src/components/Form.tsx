@@ -6,55 +6,57 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ChevronRight } from "lucide-react"
+import { Loader2 } from "lucide-react"
 
 interface FormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  company: string;
-  designation: string;
-  message: string;
+  Name_First: string;
+  Name_Last: string;
+  Email: string;
+  PhoneNumber_countrycode: string;
+  SingleLine: string;  // Company
+  SingleLine1: string; // Designation
+  MultiLine: string;   // Message
 }
 
 interface FormErrors {
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  phone?: string;
-  company?: string;
-  designation?: string;
+  Name_First?: string;
+  Name_Last?: string;
+  Email?: string;
+  PhoneNumber_countrycode?: string;
+  SingleLine?: string;
+  SingleLine1?: string;
 }
 
 const Form = () => {
-  const [countryCode, setCountryCode] = useState<string>("+91");
   const [formData, setFormData] = useState<FormData>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    company: "",
-    designation: "",
-    message: ""
+    Name_First: "",
+    Name_Last: "",
+    Email: "",
+    PhoneNumber_countrycode: "+91 ", // Initial value with country code
+    SingleLine: "",
+    SingleLine1: "",
+    MultiLine: ""
   });
+
   const [errors, setErrors] = useState<FormErrors>({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const validateField = (name: keyof FormData, value: string): void => {
     let error = "";
     switch (name) {
-      case "firstName":
-      case "lastName":
-      case "company":
-      case "designation":
-        error = value.trim() ? "" : `${name} is required`;
+      case "Name_First":
+      case "Name_Last":
+      case "SingleLine":
+      case "SingleLine1":
+        error = value.trim() ? "" : `${name.replace(/_/g, ' ')} is required`;
         break;
-      case "email":
+      case "Email":
         if (!value) error = "Email is required";
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) error = "Invalid email format";
         break;
-      case "phone":
+      case "PhoneNumber_countrycode":
         if (!value) error = "Phone is required";
-        else if (!/^\d+$/.test(value)) error = "Phone must contain only numbers";
+        else if (!/^\+?\d+$/.test(value.replace(/\s/g, ''))) error = "Invalid phone format";
         break;
     }
     setErrors(prev => ({ ...prev, [name]: error }));
@@ -64,12 +66,24 @@ const Form = () => {
     e.preventDefault();
     // Validate all fields
     (Object.keys(formData) as (keyof FormData)[]).forEach((key) => {
-      if (key !== "message") validateField(key, formData[key]);
+      validateField(key, formData[key]);
     });
     
     if (Object.values(errors).every(error => !error)) {
-      console.log("Form submitted:", { ...formData, countryCode });
+      setIsLoading(true);
+      // Prepare form data for Zoho
+      const submitData = {
+        ...formData,
+        PhoneNumber_countrycode: formData.PhoneNumber_countrycode.replace(/\s/g, '') // Remove spaces
+      };
+
+      // Submit to Zoho
+      const form = document.getElementById('zohoForm');
+      if (form) {
+        (form as HTMLFormElement).submit();
+      }
     }
+    setIsLoading(false);
   };
 
   const handleChange = (
@@ -82,139 +96,131 @@ const Form = () => {
     }
   };
 
+  const handlePhoneChange = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      PhoneNumber_countrycode: value
+    }));
+    validateField("PhoneNumber_countrycode", value);
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6 bg-black w-[315.34px] h-[212.07px] md:w-[592.68px] md:h-[427.76px] mx-auto">
-      <div className="bg-white rounded-lg p-4 md:p-8">
-        <div className="grid grid-cols-2 gap-3 md:gap-4">
-          {/* First Name */}
-          <div>
-            <Input
-              type="text"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              onBlur={(e: FocusEvent<HTMLInputElement>) => 
-                validateField("firstName", e.target.value)
-              }
-              placeholder="First name*"
-              className="border-t-0 border-x-0 rounded-none focus-visible:ring-0 px-0 text-[8px] leading-[9.38px] md:text-[12px] md:leading-[14.06px] h-8 md:h-10"
-            />
-            {errors.firstName && <span className="text-red-500 text-[6px] md:text-[10px]">{errors.firstName}</span>}
-          </div>
-
-          {/* Last Name */}
-          <div>
-            <Input
-              type="text"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              onBlur={(e: FocusEvent<HTMLInputElement>) => 
-                validateField("lastName", e.target.value)
-              }
-              placeholder="Lastname*"
-              className="border-t-0 border-x-0 rounded-none focus-visible:ring-0 px-0 text-[8px] leading-[9.38px] md:text-[12px] md:leading-[14.06px] h-8 md:h-10"
-            />
-            {errors.lastName && <span className="text-red-500 text-[6px] md:text-[10px]">{errors.lastName}</span>}
-          </div>
-
-          {/* Email */}
-          <div>
-            <Input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              onBlur={(e: FocusEvent<HTMLInputElement>) => 
-                validateField("email", e.target.value)
-              }
-              placeholder="Email*"
-              className="border-t-0 border-x-0 rounded-none focus-visible:ring-0 px-0 text-[8px] leading-[9.38px] md:text-[12px] md:leading-[14.06px] h-8 md:h-10"
-            />
-            {errors.email && <span className="text-red-500 text-[6px] md:text-[10px]">{errors.email}</span>}
-          </div>
-
-          {/* Phone */}
-          <div>
-            <div className="flex items-end gap-1 md:gap-2">
-              <Select defaultValue="+91" onValueChange={setCountryCode}>
-                <SelectTrigger className="w-[29.19px] md:w-[57.29px] h-[11.75px] md:h-[24.58px] text-[8px] leading-[9.38px] md:text-[12px] md:leading-[14.06px]">
-                  <SelectValue placeholder="+91" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="+91">+91</SelectItem>
-                  <SelectItem value="+1">+1</SelectItem>
-                  <SelectItem value="+44">+44</SelectItem>
-                  <SelectItem value="+81">+81</SelectItem>
-                </SelectContent>
-              </Select>
-              <Input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                onBlur={(e: FocusEvent<HTMLInputElement>) => 
-                  validateField("phone", e.target.value)
-                }
-                placeholder="Phone*"
-                className="border-t-0 border-x-0 rounded-none focus-visible:ring-0 px-0 text-[8px] leading-[9.38px] md:text-[12px] md:leading-[14.06px] h-8 md:h-10"
-              />
-            </div>
-            {errors.phone && <span className="text-red-500 text-[6px] md:text-[10px]">{errors.phone}</span>}
-          </div>
-
-          {/* Company */}
-          <div>
-            <Input
-              type="text"
-              name="company"
-              value={formData.company}
-              onChange={handleChange}
-              onBlur={(e: FocusEvent<HTMLInputElement>) => 
-                validateField("company", e.target.value)
-              }
-              placeholder="Company*"
-              className="border-t-0 border-x-0 rounded-none focus-visible:ring-0 px-0 text-[8px] leading-[9.38px] md:text-[12px] md:leading-[14.06px] h-8 md:h-10"
-            />
-            {errors.company && <span className="text-red-500 text-[6px] md:text-[10px]">{errors.company}</span>}
-          </div>
-
-          {/* Designation */}
-          <div>
-            <Input
-              type="text"
-              name="designation"
-              value={formData.designation}
-              onChange={handleChange}
-              onBlur={(e: FocusEvent<HTMLInputElement>) => 
-                validateField("designation", e.target.value)
-              }
-              placeholder="Designation*"
-              className="border-t-0 border-x-0 rounded-none focus-visible:ring-0 px-0 text-[8px] leading-[9.38px] md:text-[12px] md:leading-[14.06px] h-8 md:h-10"
-            />
-            {errors.designation && <span className="text-red-500 text-[6px] md:text-[10px]">{errors.designation}</span>}
-          </div>
-        </div>
-        {/* Message */}
-        <div className="mt-2 md:mt-4">
-          <Textarea
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            placeholder="Your Message"
-            className="rounded-[2.5px] md:rounded-[5px] focus-visible:ring-0 px-1 min-h-[60px] md:min-h-[100px] text-[8px] leading-[9.38px] md:text-[12px] md:leading-[14.06px] resize-none"
-          />
-        </div>
-      </div>
-
-      {/* Submit Button */}
-      <Button
-        type="submit"
-        className="w-full bg-white text-black hover:bg-[#E12B15] hover:text-white h-8 md:h-10 text-[8px] leading-[9.38px] md:text-[12px] md:leading-[14.06px]"
+    <div className="mx-auto bg-black p-4 rounded-lg">
+      <form 
+        onSubmit={handleSubmit}
+        id="zohoForm"
+        className="space-y-4 md:space-y-6"
+        action='https://forms.zohopublic.in/talentxpone1/form/Websiteleadform/formperma/TrKSxL1RnbIdPe3g_l3bftM9B0z3vZuk5Yt8ekyGV0g/htmlRecords/submit'
+        method="POST"
       >
-        Submit <ChevronRight className="text-[#E12B15] group-hover:!text-white" />
-      </Button>
-    </form>
+        <input type="hidden" name="zf_referrer_name" value="" />
+        <input type="hidden" name="zf_redirect_url" value="" />
+        <input type="hidden" name="zc_gad" value="" />
+
+        <div className="bg-white rounded-lg p-4 md:p-8 space-y-4">
+          <div className="grid grid-cols-2 gap-3 md:gap-4">
+            {/* First Name */}
+            <div>
+              <Input
+                name="Name_First"
+                value={formData.Name_First}
+                onChange={handleChange}
+                onBlur={(e) => validateField("Name_First", e.target.value)}
+                placeholder="First name*"
+                className="border-t-0 border-x-0 rounded-none focus-visible:ring-0 px-0 text-xs md:text-sm h-8 md:h-10 text-black"
+              />
+              {errors.Name_First && <span className="text-red-500 text-xs">{errors.Name_First}</span>}
+            </div>
+
+            {/* Last Name */}
+            <div>
+              <Input
+                name="Name_Last"
+                value={formData.Name_Last}
+                onChange={handleChange}
+                onBlur={(e) => validateField("Name_Last", e.target.value)}
+                placeholder="Last name*"
+                className="border-t-0 border-x-0 rounded-none focus-visible:ring-0 px-0 text-xs md:text-sm h-8 md:h-10 text-black"
+              />
+              {errors.Name_Last && <span className="text-red-500 text-xs">{errors.Name_Last}</span>}
+            </div>
+
+            {/* Email */}
+            <div>
+              <Input
+                name="Email"
+                value={formData.Email}
+                onChange={handleChange}
+                onBlur={(e) => validateField("Email", e.target.value)}
+                placeholder="Email*"
+                className="border-t-0 border-x-0 rounded-none focus-visible:ring-0 px-0 text-xs md:text-sm h-8 md:h-10 text-black"
+              />
+              {errors.Email && <span className="text-red-500 text-xs">{errors.Email}</span>}
+            </div>
+
+            {/* Phone */}
+            <div>
+              <Input
+                name="PhoneNumber_countrycode"
+                value={formData.PhoneNumber_countrycode}
+                onChange={(e) => handlePhoneChange(e.target.value)}
+                onBlur={(e) => validateField("PhoneNumber_countrycode", e.target.value)}
+                placeholder="Phone*"
+                className="border-t-0 border-x-0 rounded-none focus-visible:ring-0 px-0 text-xs md:text-sm h-8 md:h-10 text-black"
+              />
+              {errors.PhoneNumber_countrycode && <span className="text-red-500 text-xs">{errors.PhoneNumber_countrycode}</span>}
+            </div>
+
+            {/* Company */}
+            <div>
+              <Input
+                name="SingleLine"
+                value={formData.SingleLine}
+                onChange={handleChange}
+                onBlur={(e) => validateField("SingleLine", e.target.value)}
+                placeholder="Company*"
+                className="border-t-0 border-x-0 rounded-none focus-visible:ring-0 px-0 text-xs md:text-sm h-8 md:h-10 text-black"
+              />
+              {errors.SingleLine && <span className="text-red-500 text-xs">{errors.SingleLine}</span>}
+            </div>
+
+            {/* Designation */}
+            <div>
+              <Input
+                name="SingleLine1"
+                value={formData.SingleLine1}
+                onChange={handleChange}
+                onBlur={(e) => validateField("SingleLine1", e.target.value)}
+                placeholder="Designation*"
+                className="border-t-0 border-x-0 rounded-none focus-visible:ring-0 px-0 text-xs md:text-sm h-8 md:h-10 text-black"
+              />
+              {errors.SingleLine1 && <span className="text-red-500 text-xs">{errors.SingleLine1}</span>}
+            </div>
+          </div>
+
+          {/* Message */}
+          <div>
+            <Textarea
+              name="MultiLine"
+              value={formData.MultiLine}
+              onChange={handleChange}
+              placeholder="Your Message"
+              className="rounded-md focus-visible:ring-0 p-2 min-h-[100px] text-xs md:text-sm text-black"
+            />
+          </div>
+        </div>
+
+        {/* Submit Button */}
+        <Button
+          type="submit"
+          disabled={isLoading}
+          className="w-full bg-white text-black hover:bg-[#E12B15] hover:text-white h-10 md:h-12 text-sm md:text-base transition-colors duration-300"
+        >
+          {isLoading && <Loader2 className="animate-spin" />}
+          Submit <ChevronRight className="ml-2 h-4 w-4 group-hover:text-white" />
+        </Button>
+      </form>
+    </div>
   )
 }
 
