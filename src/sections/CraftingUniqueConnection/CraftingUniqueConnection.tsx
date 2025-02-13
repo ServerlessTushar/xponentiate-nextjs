@@ -1,8 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 import CustomButton from '../../components/CustomButton'
-import craftingUniqueConnection from '../../../public/homepage/craftingUniqueConnection.webp'   
-import craftingUniqueConnectionMob from '../../../public/homepage/craftingUniqueConnectionMob.webp'
+import craftingUniqueConnection from '../../../public/homepage/CraftingUniqueConnection.webp'   
+import craftingUniqueConnectionMob from '../../../public/homepage/CraftingUniqueConnectionMob.webp'
 
 const CraftingUniqueConnection = () => {
   return (
