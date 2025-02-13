@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, ChangeEvent, FocusEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ChevronRight } from "lucide-react"
 import { Loader2 } from "lucide-react"
 
@@ -72,10 +72,10 @@ const Form = () => {
     if (Object.values(errors).every(error => !error)) {
       setIsLoading(true);
       // Prepare form data for Zoho
-      const submitData = {
-        ...formData,
-        PhoneNumber_countrycode: formData.PhoneNumber_countrycode.replace(/\s/g, '') // Remove spaces
-      };
+      // const submitData = {
+      //   ...formData,
+      //   PhoneNumber_countrycode: formData.PhoneNumber_countrycode.replace(/\s/g, '') // Remove spaces
+      // };
 
       // Submit to Zoho
       const form = document.getElementById('zohoForm');
