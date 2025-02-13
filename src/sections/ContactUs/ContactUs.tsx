@@ -27,9 +27,7 @@ export default function ContactUs() {
 
           {/* Form Section */}
           <div className="w-full lg:w-1/2">
-       
               <Form />
-        
           </div>
         </div>
       </div>
