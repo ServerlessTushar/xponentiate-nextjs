@@ -3,15 +3,17 @@ import React from 'react'
 import Image from 'next/image'
 import HeroImg from '../../../public/homepage/heroImg.webp'
 import HeroImgMob from '../../../public/homepage/heroImgMob.webp'
+import TypewriterEffect from '@/components/TypewriterEffect'
 
 const HeroSection = () => {
+    const healthcareWords = ["Leader", "Consultant", "Clinicians", "Product Lead", "CXOs"];
   return (
     <div className="min-h-screen flex flex-col px-6 md:px-28 relative">
       {/* This section expands and centers the h1 vertically */}
       <div className="flex items-center justify-start mt-24 md:mt-48">
         <h1 className="text-black text-[28px] leading-[36px] md:text-[68px] md:leading-[90px] text-start">
           Find your future <br/>
-          <span className="text-[#E42217] italic">Healthcare Leader</span> |
+          <span className="text-[#E42217] italic">Healthcare <TypewriterEffect words={healthcareWords} /></span>
         </h1>
       </div>
       {/* This section places the paragraph and buttons below the h1 */}
