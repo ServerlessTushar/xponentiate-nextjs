@@ -182,7 +182,7 @@ const Form = () => {
                   value={selectedCountryCode}
                   onValueChange={(value) => setSelectedCountryCode(value)}
                 >
-                  <SelectTrigger className="w-16 focus:ring-0 px-0 text-xs md:text-sm h-8 md:h-10 text-black">
+                  <SelectTrigger className="w-8 md:w-16 focus:ring-0 px-0 text-xs md:text-sm h-8 md:h-10 text-black">
                     <SelectValue placeholder="+91" />
                   </SelectTrigger>
                   <SelectContent>
