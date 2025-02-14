@@ -21,19 +21,19 @@ export default function Navbar() {
             <div className="hidden md:flex items-center gap-8">
               <Link 
                 href="/why-partner" 
-                className="text-[15px] text-gray-600 hover:text-gray-900 transition-colors"
+                className="text-[15px] text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
               >
                 Why Partner with us
               </Link>
               <Link 
-                href="/testimonials" 
-                className="text-[15px] text-gray-600 hover:text-gray-900 transition-colors"
+                href="#testimonial-section" 
+                className="text-[15px] text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
               >
                 Testimonials
               </Link>
               <Link 
                 href="/roles" 
-                className="text-[15px] text-gray-600 hover:text-gray-900 transition-colors"
+                className="text-[15px] text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
               >
                 Find your new role
               </Link>
