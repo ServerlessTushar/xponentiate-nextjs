@@ -10,7 +10,8 @@ import ratingImg from '../../../public/homepage/fiveStar.webp'
 import FuelingHealthcareSection from "@/sections/FuelingHealthcareSection/FuelingHealthcareSection";
 import ContactUs from "@/sections/ContactUs/ContactUs";
 import Footer from "@/sections/Footer/Footer";
-import RightChoiceSection from "@/sections/RightChoiceSection/RightChoiceSection";
+//import RightChoiceSection from "@/sections/RightChoiceSection/RightChoiceSection";
+import ParallaxGallery from '../RightChoiceSection/ParallaxGallery';
 
 const testimonials = [
     {
@@ -37,7 +38,8 @@ const HomePage = () => {
             <TrustedBrand />
             <CraftingUniqueConnection />
             <PeopleJobSection />
-            <RightChoiceSection />
+            {/* <RightChoiceSection /> */}
+            <ParallaxGallery />
             <TestimonialSection testimonials={testimonials} />
             <FuelingHealthcareSection />
             <ContactUs />
