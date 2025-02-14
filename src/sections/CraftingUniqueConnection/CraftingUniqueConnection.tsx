@@ -16,7 +16,7 @@ const CraftingUniqueConnection = () => {
           Let our team solve the structural and operational problems of building a recruiting funnel, so that you can focus on what you do best.
         </p>
         <div className="mt-8 md:mt-20">
-          <CustomButton cta="It's time to accelerate your hiring" />
+          <CustomButton cta="It's time to accelerate your hiring" asChild={true} href="contact-us" />
         </div>
       </div>
       {/* Image Section */}

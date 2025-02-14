@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export default function ContactUs() {
   return (
-    <section className="bg-black text-white py-16 md:py-24 px-8">
+    <section className="bg-black text-white py-16 md:py-24 px-8" id="contact-us">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-24 items-start">
           {/* Left Content */}

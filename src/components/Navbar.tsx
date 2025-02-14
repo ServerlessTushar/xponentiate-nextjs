@@ -37,7 +37,7 @@ export default function Navbar() {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               <Link 
-                href="/why-partner" 
+                href="#why-partner" 
                 className="text-[15px] text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
               >
                 Why Partner with us
@@ -49,7 +49,7 @@ export default function Navbar() {
                 Testimonials
               </Link>
               <Link 
-                href="/roles" 
+                href="#contact-us" 
                 className="text-[15px] text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
               >
                 Find your new role
@@ -67,7 +67,7 @@ export default function Navbar() {
                 </SheetTrigger>
                 <SheetContent>
                   <div className="flex flex-col space-y-4 mt-8">
-                    <Link href="/why-partner" className="text-lg" onClick={closeSheet}>
+                    <Link href="#why-partner" className="text-lg" onClick={closeSheet}>
                       Why Partner with us
                     </Link>
                     <hr className="border-[0.5px] border-[#E42217]" />
@@ -75,7 +75,7 @@ export default function Navbar() {
                       Testimonials
                     </Link>
                     <hr className="border-[0.5px] border-[#E42217]" />
-                    <Link href="/roles" className="text-lg" onClick={closeSheet}>
+                    <Link href="#contact-us" className="text-lg" onClick={closeSheet}>
                       Find your new role
                     </Link>
                     <hr className="border-[0.5px] border-[#E42217]" />
