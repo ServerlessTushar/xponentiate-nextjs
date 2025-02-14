@@ -46,7 +46,7 @@ const RightChoiceSection = () => {
   return (
     <section className="flex flex-col md:flex-row items-center justify-between px-6 md:px-20 py-16 min-h-screen" id="why-partner">
       {/* Left Content */}
-      <div className="md:w-1/2 flex flex-col justify-center">
+      <div className="md:w-1/2 flex flex-col justify-center sticky">
         <h2 className="text-[24px] leading-8 md:text-[60px] md:leading-[64px] font-base">
           What makes us the <span className="text-[#e42217] italic font-bold">right choice</span> for you?
         </h2>
