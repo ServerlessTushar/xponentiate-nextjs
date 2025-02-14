@@ -2,13 +2,14 @@
 import React, { useRef } from 'react'
 import CustomButton from '@/components/CustomButton'
 import Image from 'next/image'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, MotionValue } from 'framer-motion'
 import image1 from '../../../public/homepage/rightChoice/rightChoice1.webp'
 import image2 from '../../../public/homepage/rightChoice/rightChoice2.webp'
 import image3 from '../../../public/homepage/rightChoice/rightChoice3.webp'
 import image4 from '../../../public/homepage/rightChoice/rightChoice4.webp'
 import image5 from '../../../public/homepage/rightChoice/rightChoice5.webp'
 import image6 from '../../../public/homepage/rightChoice/rightChoice6.webp'
+import { StaticImageData } from 'next/image'
 
 const images = [
     {
@@ -86,10 +87,10 @@ export default function ParallaxGallery() {
 }
 
 interface StackingImageProps {
-    url: string;
+    url: StaticImageData;
     title: string;
     index: number;
-    progress: any;
+    progress: MotionValue<number>;
     total: number;
 }
 
