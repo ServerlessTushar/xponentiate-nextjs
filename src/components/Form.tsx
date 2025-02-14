@@ -1,22 +1,30 @@
 "use client";
 
 import React from 'react';
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ChevronRight } from "lucide-react"
 import { Loader2 } from "lucide-react"
+import countryCodes from '../app/api/data/CountryCodes.json'; // Import your JSON file
 
 interface FormData {
   Name_First: string;
   Name_Last: string;
   Email: string;
   PhoneNumber_countrycode: string;
-  SingleLine: string;  // Company
-  SingleLine1: string; // Designation
-  MultiLine: string;   // Message
+  SingleLine: string;
+  SingleLine1: string;
+  MultiLine: string;
+  phoneNumber: string; // New field
 }
 
 interface FormErrors {
@@ -26,21 +34,33 @@ interface FormErrors {
   PhoneNumber_countrycode?: string;
   SingleLine?: string;
   SingleLine1?: string;
+  phoneNumber?: string;
 }
 
 const Form = () => {
+  const [selectedCountryCode, setSelectedCountryCode] = useState("+91");
   const [formData, setFormData] = useState<FormData>({
     Name_First: "",
     Name_Last: "",
     Email: "",
-    PhoneNumber_countrycode: "+91 ", // Initial value with country code
+    PhoneNumber_countrycode: "+91 ",
     SingleLine: "",
     SingleLine1: "",
-    MultiLine: ""
+    MultiLine: "",
+    phoneNumber: ""
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
+
+  // Combine country code and phone number
+  useEffect(() => {
+    const combinedValue = `${selectedCountryCode}-${formData.phoneNumber}`;
+    setFormData(prev => ({
+      ...prev,
+      PhoneNumber_countrycode: combinedValue
+    }));
+  }, [selectedCountryCode, formData.phoneNumber]);
 
   const validateField = (name: keyof FormData, value: string): void => {
     let error = "";
@@ -55,9 +75,9 @@ const Form = () => {
         if (!value) error = "Email is required";
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) error = "Invalid email format";
         break;
-      case "PhoneNumber_countrycode":
-        if (!value) error = "Phone is required";
-        else if (!/^\+?\d+$/.test(value.replace(/\s/g, ''))) error = "Invalid phone format";
+      case "phoneNumber":
+        if (!value) error = "Phone number is required";
+        else if (!/^\d+$/.test(value)) error = "Only numbers allowed";
         break;
     }
     setErrors(prev => ({ ...prev, [name]: error }));
@@ -67,18 +87,13 @@ const Form = () => {
     e.preventDefault();
     // Validate all fields
     (Object.keys(formData) as (keyof FormData)[]).forEach((key) => {
-      validateField(key, formData[key]);
+      if (key !== "PhoneNumber_countrycode") { // Skip combined field
+        validateField(key, formData[key]);
+      }
     });
     
     if (Object.values(errors).every(error => !error)) {
       setIsLoading(true);
-      // Prepare form data for Zoho
-      // const submitData = {
-      //   ...formData,
-      //   PhoneNumber_countrycode: formData.PhoneNumber_countrycode.replace(/\s/g, '') // Remove spaces
-      // };
-
-      // Submit to Zoho
       const form = document.getElementById('zohoForm');
       if (form) {
         (form as HTMLFormElement).submit();
@@ -97,12 +112,13 @@ const Form = () => {
     }
   };
 
-  const handlePhoneChange = (value: string) => {
+  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, '');
     setFormData(prev => ({
       ...prev,
-      PhoneNumber_countrycode: value
+      phoneNumber: value
     }));
-    validateField("PhoneNumber_countrycode", value);
+    validateField("phoneNumber", value);
   };
 
   return (
@@ -159,17 +175,42 @@ const Form = () => {
               {errors.Email && <span className="text-red-500 text-xs">{errors.Email}</span>}
             </div>
 
-            {/* Phone */}
-            <div>
-              <Input
+            {/* Phone Number */}
+            <div className="">
+              <div className="flex gap-2">
+                <Select 
+                  value={selectedCountryCode}
+                  onValueChange={(value) => setSelectedCountryCode(value)}
+                >
+                  <SelectTrigger className="w-8 md:w-16 focus:ring-0 px-0 text-xs md:text-sm h-8 md:h-10 text-black">
+                    <SelectValue placeholder="+91" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {countryCodes.map((country) => (
+                      <SelectItem key={country.code} value={country.dial_code}>
+                        {country.dial_code}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                
+                <Input
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
+                  onChange={handlePhoneChange}
+                  onBlur={(e) => validateField("phoneNumber", e.target.value)}
+                  placeholder="Phone number*"
+                  className="border-t-0 border-x-0 rounded-none focus-visible:ring-0 px-0 text-xs md:text-sm h-8 md:h-10 text-black flex-1"
+                />
+              </div>
+              {errors.phoneNumber && (
+                <span className="text-red-500 text-xs">{errors.phoneNumber}</span>
+              )}
+              <input
+                type="hidden"
                 name="PhoneNumber_countrycode"
                 value={formData.PhoneNumber_countrycode}
-                onChange={(e) => handlePhoneChange(e.target.value)}
-                onBlur={(e) => validateField("PhoneNumber_countrycode", e.target.value)}
-                placeholder="Phone*"
-                className="border-t-0 border-x-0 rounded-none focus-visible:ring-0 px-0 text-xs md:text-sm h-8 md:h-10 text-black"
               />
-              {errors.PhoneNumber_countrycode && <span className="text-red-500 text-xs">{errors.PhoneNumber_countrycode}</span>}
             </div>
 
             {/* Company */}
@@ -217,8 +258,10 @@ const Form = () => {
           disabled={isLoading}
           className="w-full bg-white text-black hover:bg-[#E12B15] hover:text-white h-10 md:h-12 text-sm md:text-base transition-colors duration-300"
         >
-          {isLoading && <Loader2 className="animate-spin" />}
-          Submit <ChevronRight className="ml-2 h-4 w-4 group-hover:text-white" />
+          {isLoading ? (
+            <Loader2 className="animate-spin mr-2 h-4 w-4" />
+          ) : null}
+          Submit <ChevronRight className="ml-2 h-4 w-4" />
         </Button>
       </form>
     </div>
