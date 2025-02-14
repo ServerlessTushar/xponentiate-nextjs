@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { robotoNormal } from "./font";
-import logo from "../../public/homepage/logo.webp"
 
 export const metadata: Metadata = {
   title: "Xponentiate | Healthcare Talent Acquisition & Leadership Solutions",
