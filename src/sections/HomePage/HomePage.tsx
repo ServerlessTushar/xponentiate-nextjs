@@ -20,23 +20,12 @@ const testimonials = [
         review: "“Xponentiate is the best recruitment team I've ever partnered with.”"
     },
     {
-        name: 'Isaac Newton',
-        title: 'Stealth VC Fund',
+        name: 'Sanchit Mullick',
+        title: 'CEO, Reveal HealthTech',
         ratingImg: ratingImg,
-        review: "“Xponentiate is the best recruitment team I've ever partnered with. Xponentiate is the best recruitment team I've ever partnered with.”"
-    },
-    {
-        name: 'Elbert Einstein',
-        title: 'Stealth VC Fund',
-        ratingImg: ratingImg,
-        review: "“Xponentiate is the best recruitment team I've ever partnered with.Xponentiate is the best recruitment team I've ever partnered with.Xponentiate is the best recruitment team I've ever partnered with.”"
-    },
-    {
-        name: 'Thomas Edison',
-        title: 'Stealth VC Fund',
-        ratingImg: ratingImg,
-        review: "“Xponentiate is the best recruitment team I've ever partnered with.Xponentiate is the best recruitment.”"
-    },
+        review: "“Working with Xponentiate streamlined our recruitment process significantly. Their ability to understand our specific needs and deliver high-quality candidates allowed us to make key hires efficiently. Their insights into HealthTech hiring trends have been a valuable addition to our strategy.”"
+    }
+   
 ]
 
 const HomePage = () => {
