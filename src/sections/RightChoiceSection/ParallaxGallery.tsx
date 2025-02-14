@@ -101,19 +101,19 @@ function StackingImage({ url, title, index, progress, total }: StackingImageProp
 
     const opacity = useTransform(
         progress,
-        [imageStart, imageStart + 0.1, imageEnd - 0.1, imageEnd],
+        [imageStart, imageStart + 0.2, imageEnd - 0.2, imageEnd],
         [0, 1, 1, 1]
     );
 
     const scale = useTransform(
         progress,
-        [imageStart, imageStart + 0.1, imageEnd - 0.1, imageEnd],
+        [imageStart, imageStart + 0.2, imageEnd - 0.2, imageEnd],
         [1.2, 1, 1, 1]
     );
 
     const translateY = useTransform(
         progress,
-        [imageStart, imageStart + 0.1, imageEnd - 0.1, imageEnd],
+        [imageStart, imageStart + 0.2, imageEnd - 0.2, imageEnd],
         [500, 0, 0, 0]
     );
 
