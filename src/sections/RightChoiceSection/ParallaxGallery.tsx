@@ -52,7 +52,7 @@ export default function ParallaxGallery() {
     });
 
     return (
-        <div ref={containerRef} className="relative h-[400vh] md:mx-20">
+        <div ref={containerRef} className="relative h-[400vh] md:mx-20" id="why-partner">
             <div className="sticky top-0 h-screen flex">
                 {/* Fixed content on the left */}
                 <div className="sticky top-0 h-screen flex flex-col lg:flex-row">
