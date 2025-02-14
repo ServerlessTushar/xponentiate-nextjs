@@ -16,7 +16,7 @@ import image6 from '../../../public/homepage/rightChoice/rightChoice6.webp'
 // import image5Mob from '../../../public/homepage/rightChoice/rightChoice5Mob.webp'   
 // import image6Mob from '../../../public/homepage/rightChoice/rightChoice6Mob.webp'
 
-const desktopImages = [image1, image2, image3, image4, image5, image6]
+const images = [image1, image2, image3, image4, image5, image6]
 //const mobileImages = [image1Mob, image2Mob, image3Mob, image4Mob, image5Mob, image6Mob]
 
 const cardVariants: Variants = {
@@ -40,13 +40,12 @@ const RightChoiceSection = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   //const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
   //const images = isMobile ? mobileImages : desktopImages
-  const images = desktopImages
 
 
   return (
     <section className="flex flex-col md:flex-row items-center justify-between px-6 md:px-20 py-16 min-h-screen" id="why-partner">
       {/* Left Content */}
-      <div className="md:w-1/2 flex flex-col justify-center sticky">
+      <div className="md:w-1/2 flex flex-col justify-center sticky top-0 h-screen">
         <h2 className="text-[24px] leading-8 md:text-[60px] md:leading-[64px] font-base">
           What makes us the <span className="text-[#e42217] italic font-bold">right choice</span> for you?
         </h2>
@@ -68,6 +67,7 @@ const RightChoiceSection = () => {
             whileInView="onscreen"
             viewport={{ once: true, amount: 0.5 }}
             variants={cardVariants}
+            style={{ zIndex: images.length - index }}
           >
             <Image
               src={img}
