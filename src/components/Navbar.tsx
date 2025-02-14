@@ -38,19 +38,19 @@ export default function Navbar() {
             <div className="hidden md:flex items-center gap-8">
               <Link 
                 href="#why-partner" 
-                className="text-[15px] text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
+                className="text-[15.84px] leading-[21.57px] text-[#616161] hover:text-gray-900 transition-colors cursor-pointer"
               >
                 Why Partner with us
               </Link>
               <Link 
                 href="#testimonial-section" 
-                className="text-[15px] text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
+                className="text-[15.84px] leading-[21.57px] text-[#616161] hover:text-gray-900 transition-colors cursor-pointer"
               >
                 Testimonials
               </Link>
               <Link 
                 href="#contact-us" 
-                className="text-[15px] text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
+                className="text-[15.84px] leading-[21.57px] text-[#616161] hover:text-gray-900 transition-colors cursor-pointer"
               >
                 Find your new role
               </Link>
@@ -67,15 +67,15 @@ export default function Navbar() {
                 </SheetTrigger>
                 <SheetContent>
                   <div className="flex flex-col space-y-4 mt-8">
-                    <Link href="#why-partner" className="text-lg" onClick={closeSheet}>
+                    <Link href="#why-partner" className="text-[24px] leading-[28px] text-[#616161]" onClick={closeSheet}>
                       Why Partner with us
                     </Link>
                     <hr className="border-[0.5px] border-[#E42217]" />
-                    <Link href="#testimonial-section" className="text-lg" onClick={closeSheet}>
+                    <Link href="#testimonial-section" className="text-[24px] leading-[28px] text-[#616161]" onClick={closeSheet}>
                       Testimonials
                     </Link>
                     <hr className="border-[0.5px] border-[#E42217]" />
-                    <Link href="#contact-us" className="text-lg" onClick={closeSheet}>
+                    <Link href="#contact-us" className="text-[24px] leading-[28px] text-[#616161]" onClick={closeSheet}>
                       Find your new role
                     </Link>
                     <hr className="border-[0.5px] border-[#E42217]" />
