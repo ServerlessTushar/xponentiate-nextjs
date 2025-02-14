@@ -37,7 +37,7 @@ const HomePage = () => {
             <TrustedBrand />
             <CraftingUniqueConnection />
             <PeopleJobSection />
-            <RightChoiceSection />
+            {/* <RightChoiceSection /> */}
             <TestimonialSection testimonials={testimonials} />
             <FuelingHealthcareSection />
             <ContactUs />
