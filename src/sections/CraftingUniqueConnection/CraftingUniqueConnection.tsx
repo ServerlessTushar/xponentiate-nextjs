@@ -6,7 +6,7 @@ import craftingUniqueConnectionMob from '../../../public/homepage/CraftingUnique
 
 const CraftingUniqueConnection = () => {
   return (
-    <div className="md:h-screen flex flex-col md:flex-row items-center md:justify-between gap-8 px-6 md:px-28 md:py-16">
+    <div className="md:h-screen flex flex-col md:flex-row items-center md:justify-between gap-8 px-6 md:px-28 md:py-16 max-w-7xl mx-auto">
       {/* Text Section */}
       <div className="md:w-[60%] text-left order-2 md:order-1">
         <h2 className="text-[24px] leading-[30px] md:text-[60px] md:leading-[64px] font-medium">

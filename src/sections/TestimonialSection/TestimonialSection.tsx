@@ -26,7 +26,7 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({ testimonials })
   }
 
   return (
-    <div className="bg-[#F1EFEF] p-8 text-center">
+    <div className="bg-[#F1EFEF] p-8 text-center" id="testimonial-section">
       <h2 className="text-[#E42217] text-xs md:text-[28px] font-medium md:leading-[56px]">Testimonial</h2>
       <h1 className="text-2xl md:text-[50px] md:leading-[56px] font-medium mt-2 mx-10">
         See what our clients have to say
