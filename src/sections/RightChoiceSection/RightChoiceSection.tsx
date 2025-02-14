@@ -72,7 +72,7 @@ const RightChoiceSection = () => {
             <Image
               src={img}
               alt={`Image ${index + 1}`}
-              className="object-cover w-[267px] h-[130px] md:w-[645.12px] md:h-[248.64px]"
+              className="object-cover w-[267px] h-[130px] md:w-[645.12px] md:h-[359.2px]"
             />
           </motion.div>
         ))}

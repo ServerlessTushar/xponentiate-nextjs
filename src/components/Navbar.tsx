@@ -30,7 +30,7 @@ export default function Navbar() {
         <div className="bg-white rounded-xl shadow-[0_2px_24px_rgba(0,0,0,0.05)] px-6 py-2 md:py-5">
           <div className="flex justify-between items-center">
             {/* Logo */}
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center cursor-pointer">
               <Image src={logo} alt="Logo" className="w-[128.09px] h-[19.97px] md:w-[258.4px] md:h-[40.27px]" />
             </Link>
 
