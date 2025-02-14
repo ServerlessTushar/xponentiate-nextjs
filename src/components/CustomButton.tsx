@@ -4,12 +4,14 @@ import React from "react";
 
 interface CustomButtonProps {
   cta: string;
-  className?: string;
+  className?: string; 
+  onClick?: () => void;
 }
 
-const CustomButton: React.FC<CustomButtonProps> = ({ cta, className }) => {
+const CustomButton: React.FC<CustomButtonProps> = ({ cta, className, onClick }) => {
   return (
     <Button
+      onClick={onClick}
       className={`
         group flex items-center gap-2 border-[#E12B15] text-black bg-white
         text-[14.4px] md:text-[18px] border rounded-[6px] transition-all duration-300
