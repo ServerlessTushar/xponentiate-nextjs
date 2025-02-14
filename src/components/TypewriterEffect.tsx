@@ -1,50 +1,59 @@
-import { motion, useAnimation } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, memo, useMemo } from "react";
 
 interface TypewriterEffectProps {
   words: string[];
 }
 
-const TypewriterEffect = ({ words }: TypewriterEffectProps) => {
-  const [index, setIndex] = useState(0);
-  const [currentWord, setCurrentWord] = useState(words[index]);
-  const controls = useAnimation();
+const TypewriterEffect = memo(({ words }: TypewriterEffectProps) => {
+  const [currentWord, setCurrentWord] = useState("");
+  const indexRef = useRef(0);
+  const timeoutRef = useRef<number | undefined>(undefined);
+
+  const memoizedWords = useMemo(() => words, [words]);
 
   useEffect(() => {
-    const typeWriter = async () => {
-      const word = words[index];
-
-      // Animate typing the word
+    const typeWriter = () => {
+      const currentIndex = indexRef.current % memoizedWords.length;
+      const word = memoizedWords[currentIndex];
+      
+      // Typing animation
       for (let i = 0; i <= word.length; i++) {
-        setCurrentWord(word.slice(0, i)); // Update the visible part of the word
-        await controls.start({ opacity: 1, transition: { duration: 0.1 } });
+        timeoutRef.current = window.setTimeout(() => {
+          setCurrentWord(word.slice(0, i));
+        }, i * 100);
       }
 
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Pause at the end of the word
-
-      // Animate erasing the word
-      for (let i = word.length; i >= 0; i--) {
-        setCurrentWord(word.slice(0, i)); // Update the visible part of the word
-        await controls.start({ opacity: 1, transition: { duration: 0.1 } });
-      }
-
-      setIndex((prevIndex) => (prevIndex + 1) % words.length); // Move to the next word
+      // Delete animation after pause
+      timeoutRef.current = window.setTimeout(() => {
+        for (let i = word.length; i >= 0; i--) {
+          timeoutRef.current = window.setTimeout(() => {
+            setCurrentWord(word.slice(0, i));
+            if (i === 0) {
+              indexRef.current++;
+              typeWriter(); // Restart the typing process for the next word
+            }
+          }, (word.length - i) * 50);
+        }
+      }, word.length * 100 + 1000);
     };
 
     typeWriter();
-  }, [index, controls, words]);
+
+    return () => {
+      if (timeoutRef.current !== undefined) {
+        window.clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [memoizedWords]);
 
   return (
     <span className="inline-flex items-center">
-      <motion.span
-        className="inline-block overflow-hidden whitespace-nowrap"
-        animate={controls}
-      >
-        {currentWord}
-      </motion.span>
-      <span className="text-black animate-blink">|</span> {/* Black blinking cursor */}
+      {currentWord}
+      <span className="text-black animate-blink">|</span>
     </span>
   );
-};
+});
+
+TypewriterEffect.displayName = 'TypewriterEffect';
 
 export default TypewriterEffect;
