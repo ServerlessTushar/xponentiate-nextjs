@@ -7,6 +7,7 @@ import TypewriterEffect from '@/components/TypewriterEffect'
 
 const HeroSection = React.memo(() => {
     const healthcareWords = ["Leader", "Consultant", "Clinicians", "Product Lead", "CXOs"];
+      
     return (
         <div className="min-h-screen flex flex-col px-6 md:px-28 relative">
             {/* This section expands and centers the h1 vertically */}
@@ -22,8 +23,8 @@ const HeroSection = React.memo(() => {
                     Xponentiate is the leading healthcare talent partner, connecting organizations with high-impact professionals to drive growth and innovation.
                 </p>
                 <div className="mt-8 md:mt-12 hidden md:flex md:justify-start md:gap-4">
-                    <CustomButton cta="Find Work" />
-                    <CustomButton cta="Find Talent" />
+                    <CustomButton cta="Find Work" asChild={true} href="contact-us" />
+                    <CustomButton cta="Find Talent" asChild={true} href="contact-us" />
                 </div>
             </div>
             <Image 
@@ -42,8 +43,8 @@ const HeroSection = React.memo(() => {
             />
             {/* Mobile-specific button container */}
             <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-4 md:hidden">
-                <CustomButton cta="Find Work" />
-                <CustomButton cta="Find Talent" />
+                <CustomButton cta="Find Work" asChild={true} href="contact-us" />
+                <CustomButton cta="Find Talent" asChild={true} href="contact-us" />
             </div>
         </div>
     )

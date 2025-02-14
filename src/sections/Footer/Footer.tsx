@@ -20,19 +20,19 @@ const Footer = () => {
             <div className="space-y-2">
               <h2 className="font-semibold text-[22px] leading-[25.78px]">Company</h2>
               <ul className="text-[14px] leading-[28.42px] space-y-1">
-                <li>About</li>
-                <li>Services</li>
-                <li>Industries</li>
-                <li>Employers</li>
-                <li>Job Seekers</li>
+                <li><span>About</span></li>
+                <li><span>Services</span></li>
+                <li><span>Industries</span></li>
+                <li><span>Employers</span></li>
+                <li><span>Job Seekers</span></li>
               </ul>
             </div>
             <div className="space-y-2 mt-8 md:mt-0">
               <h2 className="font-semibold text-[22px] leading-[25.78px]">Help</h2>
               <ul className="text-[14px] leading-[28.42px] space-y-1">
-                <li>Terms & Conditions</li>
-                <li>Privacy Policy</li>
-                <li>Customer Support</li>
+                <li><span>Terms & Conditions</span></li>
+                <li><span>Privacy Policy</span></li>
+                <li><span>Customer Support</span></li>
               </ul>
             </div>
           </div>
