@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import TestimonialCard from '@/components/TestimonialCard'
 import { StaticImageData } from 'next/image'
+import { CircleArrowLeft, CircleArrowRight } from 'lucide-react'
 
 interface Testimonial {
   name: string
@@ -35,7 +36,11 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({ testimonials })
         <TestimonialCard {...testimonials[currentIndex]} />
       </div>
       <div className="flex justify-center mt-4">
-        <button onClick={handlePrev} className="mx-2">◀</button>
+        <CircleArrowLeft 
+          onClick={handlePrev} 
+          className="mx-2 cursor-pointer w-10 h-10 hover:text-[#E42217]" 
+          strokeWidth={1}
+        />
         {testimonials.map((_, index) => (
           <button
             key={index}
@@ -45,7 +50,11 @@ const TestimonialSection: React.FC<TestimonialSectionProps> = ({ testimonials })
             ●
           </button>
         ))}
-        <button onClick={handleNext} className="mx-2">▶</button>
+        <CircleArrowRight 
+          onClick={handleNext} 
+          className="mx-2 cursor-pointer w-10 h-10 hover:text-[#E42217]" 
+          strokeWidth={1}
+        />
       </div>
     </div>
   )
