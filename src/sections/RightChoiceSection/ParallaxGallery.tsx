@@ -114,7 +114,7 @@ function StackingImage({ url, title, index, progress, total }: StackingImageProp
     const translateY = useTransform(
         progress,
         [imageStart, imageStart + 0.1, imageEnd - 0.1, imageEnd],
-        [100, 0, 0, 0]
+        [500, 0, 0, 0]
     );
 
     return (
