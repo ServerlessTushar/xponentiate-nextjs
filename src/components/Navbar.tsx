@@ -48,12 +48,12 @@ export default function Navbar() {
               >
                 Testimonials
               </Link>
-              <Link 
-                href="#contact-us" 
+              <a 
+                href="mailto:talent@xponentiate.com" 
                 className="text-[15.84px] leading-[21.57px] text-[#616161] hover:text-gray-900 transition-colors cursor-pointer"
               >
                 Find your new role
-              </Link>
+              </a>
               <CustomButton cta="Contact us" onClick={toggleForm} />
             </div>
 
@@ -75,9 +75,9 @@ export default function Navbar() {
                       Testimonials
                     </Link>
                     <hr className="border-[0.5px] border-[#E42217]" />
-                    <Link href="#contact-us" className="text-[24px] leading-[28px] text-[#616161]" onClick={closeSheet}>
+                    <a href="mailto:talent@xponentiate.com" className="text-[24px] leading-[28px] text-[#616161]" onClick={closeSheet}>
                       Find your new role
-                    </Link>
+                    </a>
                     <hr className="border-[0.5px] border-[#E42217]" />
                   </div>
                   <CustomButton cta="Contact us" className="w-[9.716rem] mt-16" onClick={() => { closeSheet(); toggleForm(); }} />
