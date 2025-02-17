@@ -186,8 +186,8 @@ const Form = () => {
                     <SelectValue placeholder="+91" />
                   </SelectTrigger>
                   <SelectContent>
-                    {countryCodes.map((country) => (
-                      <SelectItem key={country.code} value={country.dial_code}>
+                    {countryCodes.map((country,i) => (
+                      <SelectItem key={i} value={country.dial_code}>
                         {country.dial_code}
                       </SelectItem>
                     ))}

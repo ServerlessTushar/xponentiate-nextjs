@@ -8,7 +8,7 @@ const PeopleJobSection = () => {
     <div className="flex flex-row items-center justify-between gap-2 md:gap-8 mt-8 md:mt-0">
       <div className="text-left pl-4 md:pl-28 w-[90%] md:w-[60%] -mt-20">
         <h1 className="font-500 text-[30px] leading-[30px] md:text-[120px] md:leading-[120px] text-[#DAD8D8]">
-          It&apos;s not a <br/><span className="text-[#E42217]">People-Job</span><br/> match <br/>anymore! |
+          It&apos;s not a <br/><span className="text-[#E42217]">candidate-job</span><br/> match <br/>anymore! |
         </h1>
       </div>
       <div className="mt-4 md:mt-0">

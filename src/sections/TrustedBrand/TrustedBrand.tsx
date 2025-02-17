@@ -31,7 +31,7 @@ const TrustedBrand = () => {
             300+
           </h3>
           <p className="text-sm md:text-[27px] md:leading-[31.64px]">
-            positions we closed
+            positions closed
           </p>
         </div>
       </div>
